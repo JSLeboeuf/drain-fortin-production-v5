@@ -43,13 +43,13 @@ drain-fortin-production-v5/
 - **Mode test**: 450-280-3222 configuré
 
 ### 2. Assistant VAPI - ✅ CONFIRMÉ
-- **ID**: `88e33137-f408-49ae-91cf-1606d107945a`
+- **ID**: `90395b6a-5b14-4515-a7b8-1149db5787bc`
 - **Nom**: Paul V5 - Assistant Drain Fortin
 - **Test API**: Assistant trouvé et configuré ✅
 
 ### 3. Numéro téléphone - ✅ CONFIRMÉ
 - **Numéro**: 438-900-4385
-- **Assigné à**: Paul V5 (88e33137)
+- **Assigné à**: Paul V5 (90395b6a)
 - **Status**: Prêt pour appels
 
 ### 4. Tables SQL - ✅ CRÉÉES

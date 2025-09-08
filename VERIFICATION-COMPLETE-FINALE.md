@@ -21,7 +21,7 @@
 ### 3. Assistant VAPI ✅
 ```
 ✅ Assistant trouvé: Paul V5
-✅ ID: 88e33137-f408-49ae-91cf-1606d107945a
+✅ ID: 90395b6a-5b14-4515-a7b8-1149db5787bc
 ✅ Webhook configuré correctement
 ✅ Toutes les 7 règles d'affaires présentes
 ✅ Numéro 438-900-4385 assigné

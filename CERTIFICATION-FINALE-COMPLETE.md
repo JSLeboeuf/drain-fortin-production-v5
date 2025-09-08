@@ -33,7 +33,7 @@
 
 ### 3. Assistant VAPI ✅
 - **Nom**: Paul V5 - Assistant Drain Fortin
-- **ID**: 88e33137-f408-49ae-91cf-1606d107945a
+- **ID**: 90395b6a-5b14-4515-a7b8-1149db5787bc
 - **Webhook**: Correctement configuré
 - **Numéro**: 438-900-4385 assigné
 

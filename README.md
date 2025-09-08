@@ -2,14 +2,15 @@
 
 ## Configuration Active
 
-### Webhook Supabase
-- **URL**: `https://phiduqxcufdmgjvdipyu.supabase.co/functions/v1/vapi-webhook`
+### Webhook
+- **URL Nouvel Assistant**: `https://paul-v42.drainfortin.ca/webhook`
+- **URL Supabase (backup)**: `https://phiduqxcufdmgjvdipyu.supabase.co/functions/v1/vapi-webhook`
 - **Status**: ✅ Déployé et actif
 - **Sécurité**: HMAC activée
 
 ### Assistant VAPI
-- **ID**: `88e33137-f408-49ae-91cf-1606d107945a`
-- **Nom**: Paul V5 - Assistant Drain Fortin
+- **ID**: `90395b6a-5b14-4515-a7b8-1149db5787bc`
+- **Nom**: Paul DrainFortin v4.2
 - **Numéro**: 438-900-4385
 
 ### Mode Test

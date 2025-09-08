@@ -50,7 +50,7 @@ Tables à créer:
 
 **URL**: https://dashboard.vapi.ai/assistants
 
-1. Trouver l'assistant ID: `88e33137-f408-49ae-91cf-1606d107945a`
+1. Trouver l'assistant ID: `90395b6a-5b14-4515-a7b8-1149db5787bc`
 2. Cliquer "Edit"
 3. Vérifier que le webhook URL est: `https://phiduqxcufdmgjvdipyu.supabase.co/functions/v1/vapi-webhook`
 4. Vérifier que le prompt contient toutes les règles (Prix 350$, Maxime, Guillaume, etc.)

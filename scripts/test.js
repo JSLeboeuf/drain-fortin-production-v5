@@ -30,7 +30,7 @@ https.get(options, (res) => {
   res.on('end', () => {
     try {
       const assistants = JSON.parse(data);
-      const paul = assistants.find(a => a.id === '88e33137-f408-49ae-91cf-1606d107945a');
+      const paul = assistants.find(a => a.id === '90395b6a-5b14-4515-a7b8-1149db5787bc');
       if (paul) {
         console.log('   ✅ Assistant Paul V5 configuré');
       } else {

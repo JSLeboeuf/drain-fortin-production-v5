@@ -7,7 +7,7 @@
 const https = require('https');
 
 const VAPI_API_KEY = 'a9734091-6a88-4d18-992d-03d7731f7517';
-const ASSISTANT_ID = '88e33137-f408-49ae-91cf-1606d107945a';
+const ASSISTANT_ID = '90395b6a-5b14-4515-a7b8-1149db5787bc';
 
 function vapiRequest(method, endpoint) {
   return new Promise((resolve, reject) => {
