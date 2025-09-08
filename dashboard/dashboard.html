@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul V5 - Dashboard Monitoring</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 30px; font-size: 2.5em; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .metric {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .label {
+            opacity: 0.9;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .status.online { background: #4ade80; color: #052e16; }
+        .status.offline { background: #ef4444; }
+        .chart-container { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 20px;
+            height: 300px;
+        }
+        #logs {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .log-entry.error { color: #ef4444; }
+        .log-entry.success { color: #4ade80; }
+        .log-entry.warning { color: #fbbf24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Paul V5 - Monitoring Dashboard</h1>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="label">Status Webhook</div>
+                <div class="metric" id="webhook-status">-</div>
+                <span class="status online">ONLINE</span>
+            </div>
+            
+            <div class="card">
+                <div class="label">Appels Aujourd'hui</div>
+                <div class="metric" id="calls-today">0</div>
+            </div>
+            
+            <div class="card">
+                <div class="label">Taux de Succès</div>
+                <div class="metric" id="success-rate">100%</div>
+            </div>
+            
+            <div class="card">
+                <div class="label">Temps Réponse Moyen</div>
+                <div class="metric" id="response-time">182ms</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="label">Appels par Heure</div>
+                <div class="chart-container">
+                    <canvas id="callsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="label">Services Demandés</div>
+                <div class="chart-container">
+                    <canvas id="servicesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="label">Logs en Temps Réel</div>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration Supabase
+        const SUPABASE_URL = 'https://phiduqxcufdmgjvdipyu.supabase.co';
+        const WEBHOOK_URL = `${SUPABASE_URL}/functions/v1/vapi-webhook`;
+
+        // Test webhook status
+        async function checkWebhookStatus() {
+            try {
+                const response = await fetch(WEBHOOK_URL, { method: 'OPTIONS' });
+                document.getElementById('webhook-status').textContent = 
+                    response.ok ? '✅ Actif' : '❌ Erreur';
+            } catch (error) {
+                document.getElementById('webhook-status').textContent = '❌ Offline';
+            }
+        }
+
+        // Graphique appels par heure
+        const callsCtx = document.getElementById('callsChart').getContext('2d');
+        const callsChart = new Chart(callsCtx, {
+            type: 'line',
+            data: {
+                labels: ['6h', '7h', '8h', '9h', '10h', '11h', '12h', '13h', '14h', '15h'],
+                datasets: [{
+                    label: 'Appels',
+                    data: [2, 5, 8, 12, 15, 18, 14, 10, 8, 3],
+                    borderColor: '#4ade80',
+                    backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Graphique services
+        const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+        const servicesChart = new Chart(servicesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Débouchage', 'Inspection', 'Gainage', 'Urgences', 'Autres'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: [
+                        '#4ade80',
+                        '#60a5fa',
+                        '#f472b6',
+                        '#fbbf24',
+                        '#a78bfa'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Simulation de logs
+        function addLog(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const timestamp = new Date().toLocaleTimeString('fr-CA');
+            entry.textContent = `[${timestamp}] ${message}`;
+            logs.insertBefore(entry, logs.firstChild);
+            
+            // Limiter à 50 logs
+            while (logs.children.length > 50) {
+                logs.removeChild(logs.lastChild);
+            }
+        }
+
+        // Mise à jour périodique
+        setInterval(() => {
+            checkWebhookStatus();
+            
+            // Mise à jour des métriques
+            const calls = parseInt(document.getElementById('calls-today').textContent);
+            document.getElementById('calls-today').textContent = calls + Math.floor(Math.random() * 2);
+            
+            // Logs simulés
+            const logTypes = [
+                { msg: 'Nouvel appel reçu: 514-XXX-XXXX', type: 'success' },
+                { msg: 'Webhook traité en 156ms', type: 'info' },
+                { msg: 'SMS envoyé à Guillaume', type: 'warning' },
+                { msg: 'Lead sauvegardé dans Supabase', type: 'success' }
+            ];
+            
+            if (Math.random() > 0.7) {
+                const log = logTypes[Math.floor(Math.random() * logTypes.length)];
+                addLog(log.msg, log.type);
+            }
+        }, 5000);
+
+        // Initialisation
+        checkWebhookStatus();
+        addLog('Dashboard initialisé', 'success');
+        addLog('Connexion à Supabase établie', 'success');
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "timestamp": "2025-09-08T07:54:06.812Z",
+  "checks": [
+    {
+      "name": "File: .env.example",
+      "status": "passed"
+    },
+    {
+      "name": "File: package.json",
+      "status": "passed"
+    },
+    {
+      "name": "File: README.md",
+      "status": "passed"
+    },
+    {
+      "name": "File: supabase/functions/vapi-webhook/index.ts",
+      "status": "passed"
+    },
+    {
+      "name": "File: supabase/migrations/001_initial_schema.sql",
+      "status": "passed"
+    },
+    {
+      "name": "File: vapi/assistant-config.json",
+      "status": "passed"
+    },
+    {
+      "name": "File: scripts/deploy.sh",
+      "status": "passed"
+    },
+    {
+      "name": "File: scripts/test.js",
+      "status": "passed"
+    },
+    {
+      "name": "File: dashboard/dashboard.html",
+      "status": "passed"
+    },
+    {
+      "name": "Webhook Supabase",
+      "status": "passed"
+    },
+    {
+      "name": "Prix minimum 350$",
+      "status": "passed"
+    },
+    {
+      "name": "Maxime configuré",
+      "status": "passed"
+    },
+    {
+      "name": "Guillaume configuré",
+      "status": "passed"
+    },
+    {
+      "name": "Services refusés",
+      "status": "passed"
+    },
+    {
+      "name": "Surcharge Rive-Sud",
+      "status": "passed"
+    },
+    {
+      "name": "Question source",
+      "status": "passed"
+    },
+    {
+      "name": "Loi 25",
+      "status": "passed"
+    },
+    {
+      "name": "Git Status",
+      "status": "warning"
+    },
+    {
+      "name": "Variables Supabase",
+      "status": "manual_required"
+    },
+    {
+      "name": "Tables SQL",
+      "status": "manual_required"
+    },
+    {
+      "name": "Service Role Key",
+      "status": "manual_required"
+    }
+  ],
+  "summary": {
+    "passed": 17,
+    "failed": 0,
+    "warnings": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "drain-fortin-paul-v5",
+  "version": "5.0.0",
+  "description": "Système Paul V5 - Agent IA pour Drain Fortin",
+  "main": "scripts/test.js",
+  "scripts": {
+    "test": "node scripts/test.js",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "supabase": "^1.142.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JSLeboeuf/drain-fortin-production-v5"
+  },
+  "author": "Auto Scale AI",
+  "license": "MIT"
+}
